@@ -18,6 +18,7 @@ This system simulates a real hospital front desk, capable of interacting with pa
 
 ## 🧱 Project Structure
 
+```text
 AI-Hospital-Receptionist-System/
 │
 ├── backend/
