@@ -4,6 +4,11 @@ An advanced, locally-hosted AI hospital receptionist built using Flask and a loc
 This system simulates a real hospital front desk, capable of interacting with patients, managing queries, and guiding them through symptom descriptions with empathy and professionalism—all while keeping data 100% private on the local machine.
 
 ---
+**Here is a look at the UI in action:**
+![AI Receptionist Chat UI](Final OP2.png)
+---
+
+---
 
 ## 🚀 Features
 
