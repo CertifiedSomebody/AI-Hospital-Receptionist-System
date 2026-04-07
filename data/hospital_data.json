@@ -1,0 +1,107 @@
+{
+  "hospital": {
+    "name": "CityCare Multi-Speciality Hospital",
+    "location": "Mumbai, India",
+    "contact": {
+      "phone": "+91-9876543210",
+      "email": "info@citycarehospital.com"
+    },
+    "working_hours": "24/7",
+    "emergency_available": true
+  },
+
+  "departments": [
+    {
+      "name": "General Medicine",
+      "description": "Primary care for adults, common illnesses and health checkups",
+      "available": true
+    },
+    {
+      "name": "Cardiology",
+      "description": "Heart-related diagnosis and treatment",
+      "available": true
+    },
+    {
+      "name": "Orthopedics",
+      "description": "Bone, joint, and muscle care",
+      "available": true
+    },
+    {
+      "name": "Pediatrics",
+      "description": "Healthcare for infants and children",
+      "available": true
+    },
+    {
+      "name": "Dermatology",
+      "description": "Skin, hair, and nail treatments",
+      "available": true
+    }
+  ],
+
+  "doctors": [
+    {
+      "id": "DOC001",
+      "name": "Dr. Amit Sharma",
+      "department": "Cardiology",
+      "experience_years": 12,
+      "availability": {
+        "days": ["Monday", "Wednesday", "Friday"],
+        "time": "10:00 AM - 2:00 PM"
+      }
+    },
+    {
+      "id": "DOC002",
+      "name": "Dr. Neha Verma",
+      "department": "Dermatology",
+      "experience_years": 8,
+      "availability": {
+        "days": ["Tuesday", "Thursday"],
+        "time": "11:00 AM - 4:00 PM"
+      }
+    },
+    {
+      "id": "DOC003",
+      "name": "Dr. Rajesh Mehta",
+      "department": "Orthopedics",
+      "experience_years": 15,
+      "availability": {
+        "days": ["Monday", "Thursday", "Saturday"],
+        "time": "9:00 AM - 1:00 PM"
+      }
+    },
+    {
+      "id": "DOC004",
+      "name": "Dr. Priya Kulkarni",
+      "department": "Pediatrics",
+      "experience_years": 10,
+      "availability": {
+        "days": ["Monday", "Tuesday", "Friday"],
+        "time": "12:00 PM - 5:00 PM"
+      }
+    }
+  ],
+
+  "services": [
+    "Emergency Care",
+    "OPD Consultation",
+    "Lab Testing",
+    "Pharmacy",
+    "Ambulance Service",
+    "Health Checkups"
+  ],
+
+  "faqs": [
+    {
+      "question": "What are hospital timings?",
+      "answer": "We are open 24/7 for all emergency and general services."
+    },
+    {
+      "question": "How to book an appointment?",
+      "answer": "You can book via this chat system or call our reception."
+    },
+    {
+      "question": "Do you have emergency services?",
+      "answer": "Yes, emergency services are available 24/7."
+    }
+  ]
+}

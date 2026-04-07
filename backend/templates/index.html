@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hospital Receptionist</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: #1e293b;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background: #2563eb;
+            margin-left: auto;
+        }
+
+        .bot {
+            background: #334155;
+        }
+
+        #input-container {
+            display: flex;
+            padding: 10px;
+            background: #1e293b;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background: #22c55e;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    🏥 AI Hospital Receptionist
+</header>
+
+<div id="chat-container">
+    <div class="message bot">Hello! I am your AI Hospital Receptionist. How can I help you today?</div>
+</div>
+
+<div id="input-container">
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    // ✅ Using relative URL to dodge CORS issues entirely
+    const API_URL = "/api/chatbot/chat"; 
+    let sessionId = null;
+
+    function addMessage(text, sender) {
+        const chat = document.getElementById("chat-container");
+        const msg = document.createElement("div");
+        msg.classList.add("message", sender);
+        msg.innerText = text;
+        chat.appendChild(msg);
+        chat.scrollTop = chat.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        addMessage(message, "user");
+        input.value = "";
+
+        try {
+            const res = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message,
+                    session_id: sessionId
+                })
+            });
+
+            // ❗ Catch backend errors (like Ollama being down) and read the JSON
+            if (!res.ok) {
+                let errorMsg = `Server error: ${res.status}`;
+                try {
+                    const errorData = await res.json();
+                    if (errorData.error) errorMsg = errorData.error;
+                } catch (e) {
+                    // Ignore JSON parse errors if the server sends back plain text/HTML
+                }
+                throw new Error(errorMsg);
+            }
+
+            const data = await res.json();
+
+            // ❗ Safe extraction
+            const reply = data.response || data.reply || "Sorry, I couldn't generate a response.";
+            sessionId = data.session_id || sessionId;
+
+            addMessage(reply, "bot");
+
+        } catch (err) {
+            console.error("Fetch Error:", err);
+            // This will now print the EXACT error to the chat screen
+            addMessage(`⚠️ Error: ${err.message}`, "bot");
+        }
+    }
+
+    // Enter key support
+    document.getElementById("user-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault(); // Prevents accidental page reloads
+            sendMessage();
+        }
+    });
+</script>
+
+</body>
+</html>
