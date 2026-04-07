@@ -5,7 +5,7 @@ This system simulates a real hospital front desk, capable of interacting with pa
 
 ---
 **Here is a look at the UI in action:**
-![AI Receptionist Chat UI](assets/Final OP2.png)
+![AI Receptionist Chat UI](assets/Final_OP2.png)
 ---
 
 ---
